@@ -11,30 +11,10 @@ const allUsers = async () => {
 }
 
 
-const newUser = async () => {
-    const user = await createUser({
-        name: 'test',
-        username: 'test',
-        email: 'hola@hola.com',
-        address: {
-            street: 'test',
-            suite: 'test',
-            city: 'test',
-            zipcode: 'test',
-            geo: {
-                lat: 'test',
-                lng: 'test'
-            }
-        },
-        phone: 'test',
-        website: 'test',
-        company: {
-            name: 'test',
-            catchPhrase: 'test',
-            bs: 'test'
-        }
-    })
+const newUser = async data => {
+    const user = await createUser(data)
     // console.log('user:', user)
+    return user
 }
     
 

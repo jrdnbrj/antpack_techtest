@@ -5,7 +5,11 @@ const express = require('express')
 const app = express()
 const port = 8000
 
-const { allUsers, newUser, usersFromApi } = require('./src/userResolver')
+const { 
+  allUsers, 
+  newUser, 
+  usersFromApi 
+} = require('./src/userResolver')
 
 
 app.use(express.json()) 
@@ -25,10 +29,24 @@ app.get('/users', async (req, res) => {
   res.json(users)
 })
 
-app.post('/user/create', (req, res) => {
-  console.log('req.body:', req.body)
+app.post('/user/create', async (req, res) => {
+  // console.log('req.body:', req.body)
   // res.send('Usuario!')
-  // newUser()
+  const user = await newUser(req.body)
+  let response = {}
+  
+  if (user && user._id)
+    response = {
+      created: true,
+      message: 'Usuario creado correctamente',
+    }
+  else 
+    response = {
+      created: false,
+      message: 'Error al crear el usuario',
+    }
+
+  res.json(response)
 })
 
 app.listen(port, () => {

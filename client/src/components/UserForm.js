@@ -3,7 +3,7 @@ import EmailValidator from 'email-validator'
 import urlRegex from 'url-regex'
 import Loading from './Loading'
 
-const UserForm = ({ onSubmit }) => {
+const UserForm = ({ onSubmit, user = {} }) => {
 
     const [loading, setLoading] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
@@ -71,7 +71,7 @@ const UserForm = ({ onSubmit }) => {
 
         const form = e.target
 
-        const user = {
+        const userForm = {
             name: form.name.value,
             username: form.username.value,
             email: form.email.value,
@@ -94,15 +94,19 @@ const UserForm = ({ onSubmit }) => {
             }
         }
 
-
-        if (validateForm(user)) {
-            const response = await onSubmit(user)
+        
+        if (validateForm(userForm)) {
+            if (user)
+                userForm._id = user._id
+            
+            const response = await onSubmit(userForm)
 
             if (response.created)
                 setSuccessMsg(response.message)
             else
                 setErrorMsg(response.message)
         }
+
         setLoading(false)
     }
 
@@ -110,32 +114,26 @@ const UserForm = ({ onSubmit }) => {
     return (
         <div>
             <form className="user-form" onSubmit={handleSubmit}>
-                <input type="text" id="name" placeholder="Nombre" />
-                <input type="text" id="username" placeholder="Nombre de usuario" />
-                <input type="email" id="email" placeholder="Correo Electrónio" />
-                <input type="text" id="website" placeholder="Sitio Web" />
-                <input type="text" id="phone" placeholder="Telefono" />
+                <input type="text" id="name" placeholder="Nombre" defaultValue={user.name} />
+                <input type="text" id="username" placeholder="Nombre de usuario" defaultValue={user.username} />
+                <input type="email" id="email" placeholder="Correo Electrónio" defaultValue={user.email} />
+                <input type="text" id="website" placeholder="Sitio Web" defaultValue={user.website} />
+                <input type="text" id="phone" placeholder="Telefono" defaultValue={user.phone} />
 
                 <div className="address-title">DIRECCION</div>
-                <input type="text" id="street" placeholder="Calle" />
-                <input type="text" id="suite" placeholder="Suite" />
-                <input type="text" id="city" placeholder="Ciudad" />
-                <input type="text" id="zipcode" placeholder="Código ZIP" />
-                <input type="text" id="lat" placeholder="Latitud" />
-                <input type="text" id="lng" placeholder="Longitud" />
+                <input type="text" id="street" placeholder="Calle" defaultValue={user.address?.street} />
+                <input type="text" id="suite" placeholder="Suite" defaultValue={user.address?.suite} />
+                <input type="text" id="city" placeholder="Ciudad" defaultValue={user.address?.city} />
+                <input type="text" id="zipcode" placeholder="Código ZIP" defaultValue={user.address?.zipcode} />
+                <input type="text" id="lat" placeholder="Latitud" defaultValue={user.address?.geo.lat} />
+                <input type="text" id="lng" placeholder="Longitud" defaultValue={user.address?.geo.lng} />
 
                 <div className="company-title">COMPAÑIA</div>
-                <input type="text" id="companyName" placeholder="Nombre de la compañia" />
-                <input type="text" id="catchPhrase" placeholder="Eslogan" />
-                <input type="text" id="bs" placeholder="BS" />
-                <button className="save-title" type="submit">
-                    {loading ? 
-                        <>
-                            GUARDANDO
-                            <Loading />
-                        </>
-                        : 'GUARDAR'
-                    }
+                <input type="text" id="companyName" placeholder="Nombre" defaultValue={user.company?.name} />
+                <input type="text" id="catchPhrase" placeholder="Eslogan" defaultValue={user.company?.catchPhrase} />
+                <input type="text" id="bs" placeholder="BS" defaultValue={user.company?.bs} />
+                <button className="save-title" type="submit" disabled={loading}>
+                    {loading ? <>GUARDANDO<Loading /></> : 'GUARDAR'}
                 </button>
             </form>
             {errorMsg && 

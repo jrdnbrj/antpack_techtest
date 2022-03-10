@@ -17,17 +17,18 @@ const createUser = async data => {
 }
 
 const editUser = async data => {
-    const user = await User.findByIdAndUpdate(data.id, data)
+    const user = await User.findByIdAndUpdate(data._id, data)
     return user
 }
 
-const deleteUser = async data => {
-    const user = await User.findByIdAndDelete(data.id)
+const deleteUser = async id => {
+    const user = await User.findByIdAndDelete(id)
     return user
 }
 
 module.exports = {
     getUsers,
+    getUserById,
     createUser,
     editUser,
     deleteUser,

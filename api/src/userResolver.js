@@ -1,7 +1,9 @@
 const { 
     getUsers,
     getUserById,
-    createUser 
+    createUser,
+    editUser,
+    deleteUser,
 } = require('./userService')
 
 
@@ -21,8 +23,20 @@ const newUser = async data => {
     return user
 }
     
+const updateUser = async data => {
+    const user = await editUser(data)
+    return user
+}
+
+const removeUser = async id => {
+    const user = await deleteUser(id)
+    return user
+}
 
 module.exports = {
     allUsers,
+    userById,
     newUser,
+    updateUser,
+    removeUser
 }

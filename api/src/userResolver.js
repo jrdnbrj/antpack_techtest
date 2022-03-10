@@ -19,24 +19,59 @@ const userById = async id => {
 
 const newUser = async data => {
     const user = await createUser(data)
-    // console.log('user:', user)
-    return user
+
+    if (user && user._id)
+        return {
+            created: true,
+            message: 'Usuario creado correctamente.',
+        }
+    else 
+        return {
+            created: false,
+            message: 'Error al crear el usuario.',
+        }
 }
     
 const updateUser = async data => {
     const user = await editUser(data)
-    return user
+    
+    if (user && user._id)
+        return {
+            updated: true,
+            message: 'Usuario actualizado correctamente.',
+        }
+    else 
+        return {
+            updated: false,
+            message: 'Error al actualizar el usuario.',
+        }
 }
 
 const removeUser = async id => {
     const user = await deleteUser(id)
-    return user
+
+    if (user && user._id)
+        return {
+            deleted: true,
+            message: 'Usuario eliminado correctamente.',
+        }
+    else 
+        return {
+            deleted: false,
+            message: 'Error al eliminar el usuario.',
+        }
 }
+// data = [{}, {}]
+const importUsers = async data => {
+}
+    
+
 
 module.exports = {
     allUsers,
     userById,
     newUser,
     updateUser,
-    removeUser
+    removeUser,
+    importUsers
 }

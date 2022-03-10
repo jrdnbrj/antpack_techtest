@@ -1,9 +1,26 @@
-const Modal = ({ userName }) => {
+import { useState } from 'react'
+import Loading from './Loading'
+
+
+const Modal = ({ id, userName, deleteUser }) => {
+
+    const [loading, setLoading] = useState(false)
 
     const closeModal = () => {
         console.log('Close')
         const modal = document.getElementById('modal')
         modal.style.display = 'none'
+    }
+
+    const handleDelete = () => {
+        setLoading(true)
+        deleteUser(id)
+            .then(() => {
+                console.log('User deleted')
+                closeModal()
+            })
+            .catch(console.error)
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -23,7 +40,10 @@ const Modal = ({ userName }) => {
                     Estás seguro que deseas eliminar la información de contacto de <strong>{userName}</strong>?
                 </p>
                 <div>
-                    <button className="delete-btn">Eliminar</button>
+                    <button className="delete-btn" onClick={handleDelete}>
+                        Eliminar
+                        {loading && <Loading />}
+                    </button>
                     <button className="cancel-btn" onClick={closeModal}>Cancelar</button>
                 </div>
             </div>

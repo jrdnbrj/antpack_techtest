@@ -26,7 +26,14 @@ export const editUser = async data => {
 }
 
 export const deleteUser = async id => {
-    const url = 'http://localhost:8000/user/delete'
-    const user = await axios.post(url, { id })
+    const url = `http://localhost:8000/user/delete/${id}`
+    const user = await axios.delete(url)
     return user.data
+}
+
+// https://jsonplaceholder.typicode.com/users
+export const importUsers = async () => {
+    const url = 'https://jsonplaceholder.typicode.com/users'
+    const users = await axios.get(url)
+    return users.data
 }

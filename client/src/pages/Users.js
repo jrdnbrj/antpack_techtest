@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { getUsers } from '../api'
+import { getUsers, deleteUser } from '../api'
 import Loading from '../components/Loading'
 import Modal from '../components/Modal'
 import Gravatar from 'react-gravatar'
@@ -11,6 +11,7 @@ const Users = () => {
 
     const navigate = useNavigate()
 
+    const [userId, setUserId] = useState('')
     const [userName, setUserName] = useState('')
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
@@ -25,6 +26,7 @@ const Users = () => {
     const editUser = id => navigate(`/user/edit/${id}`)
 
     const removeUser = user => {
+        setUserId(user._id)
         setUserName(user.name)
         const modal = document.getElementById('modal')
         modal.style.display = 'flex'
@@ -32,7 +34,7 @@ const Users = () => {
 
     return (
         <div className="container">
-            <Modal userName={userName} />
+            <Modal id={userId} deleteUser={deleteUser} userName={userName} />
             <h2 className="users-title">Usuarios</h2>
             <Link to="/user/create" className="create-user">Agregar Usuario</Link>
             <table className="responsive-table">

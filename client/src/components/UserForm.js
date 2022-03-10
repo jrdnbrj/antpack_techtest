@@ -96,12 +96,12 @@ const UserForm = ({ onSubmit }) => {
 
 
         if (validateForm(user)) {
-            const newUser = await onSubmit(user)
+            const response = await onSubmit(user)
 
-            if (newUser.created)
-                setSuccessMsg(newUser.message)
+            if (response.created)
+                setSuccessMsg(response.message)
             else
-                setErrorMsg(newUser.message)
+                setErrorMsg(response.message)
         }
         setLoading(false)
     }

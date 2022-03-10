@@ -1,10 +1,14 @@
 const User = require("./userModel")
-// const fetch = require("node-fetch")
 
 
 const getUsers = async data => {
     const users = await User.find({})
     return users
+}
+
+const getUserById = async id => {
+    const user = await User.findById(id)
+    return user
 }
 
 const createUser = async data => {
@@ -22,17 +26,9 @@ const deleteUser = async data => {
     return user
 }
 
-const importUsers = async () => {
-//     const users = await fetch("https://jsonplaceholder.typicode.com/users")
-//         .then(res => res.json())
-//     console.log('Users:', users)
-//     // await Post.insertMany(posts)
-}
-
 module.exports = {
     getUsers,
     createUser,
     editUser,
     deleteUser,
-    importUsers
 }

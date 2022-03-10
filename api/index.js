@@ -1,23 +1,20 @@
 require('dotenv').config()
+
 const mongoose = require('mongoose')
-
 const express = require('express')
-const app = express()
-const port = 8000
-
+const cors = require('cors')
 const { 
   allUsers, 
   newUser, 
-  usersFromApi 
 } = require('./src/userResolver')
 
 
+const app = express()
+const port = 8000
+
 app.use(express.json()) 
 
-const cors = require('cors')
-app.use(cors({
-  origin: '*'
-}));
+app.use(cors({ origin: '*' }));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -25,13 +22,16 @@ app.get('/', (req, res) => {
 
 app.get('/users', async (req, res) => {
   const users = await allUsers()
-  // console.log('users:', users)
+  res.json(users)
+})
+
+app.get('/user/:id', async (req, res) => {
+  console.log('ID:', req.params.id)
+  const users = await allUsers()
   res.json(users)
 })
 
 app.post('/user/create', async (req, res) => {
-  // console.log('req.body:', req.body)
-  // res.send('Usuario!')
   const user = await newUser(req.body)
   let response = {}
   

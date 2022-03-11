@@ -5,7 +5,7 @@ const {
     editUser,
     deleteUser,
     importUsers
-} = require('./userService')
+} = require('../services/userService')
 
 
 const allUsers = async () => {

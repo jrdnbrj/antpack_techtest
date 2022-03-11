@@ -3,14 +3,6 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 const cors = require('cors')
-const { 
-  allUsers, 
-  userById,
-  newUser,
-  updateUser,
-  removeUser,
-  importAPIUsers
-} = require('./src/userResolver')
 
 const indexRouter = require('./src/routes/index');
 const usersRouter = require('./src/routes/users');

@@ -1,4 +1,4 @@
-const User = require("./userModel")
+const User = require('../models/userModel')
 
 
 const getUsers = async data => {
@@ -36,5 +36,6 @@ module.exports = {
     getUserById,
     createUser,
     editUser,
-    deleteUser
+    deleteUser,
+    importUsers
 }

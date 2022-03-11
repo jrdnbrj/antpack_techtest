@@ -43,6 +43,7 @@
     text-decoration: none;
     margin-top: 0.5rem;
     font-family: 'Gill Sans MT';
+    cursor: pointer;
 }
 .responsive-table {
     border-spacing: 0;
@@ -174,7 +175,11 @@
 }
 .catchPhrase {
     grid-row: 4;
-    grid-column: 1 / 4;
+    grid-column: 1 / 3;
+}
+.bs {
+    grid-row: 4;
+    grid-column: 3 / 5;
 }
 .save-title {
     grid-row: 4;
@@ -331,6 +336,6 @@
     padding: 0.5rem 1rem;
     text-align: center;
 }
-.delete-icon {
+.delete-icon, .edit-user {
     cursor: pointer;
 }

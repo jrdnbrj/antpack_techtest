@@ -7,7 +7,8 @@ const {
     newUser,
     updateUser,
     removeUser,
-} = require('../userResolver.js')
+    importAPIUsers
+} = require('../controllers/userController')
 
 
 router.get('/', async (req, res) => 

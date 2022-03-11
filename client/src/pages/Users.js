@@ -33,14 +33,16 @@ const Users = () => {
     }
 
     const importAPIUsers = () => {
-        // setLoading(true)
         console.log('Users imported')
-        // importUsers()
-        //     .then(() => {
-        //         console.log('Users imported')
-        //     })
-        //     .catch(console.error)
-        //     .finally(() => setLoading(false))
+        importUsers()
+            .then(data => {
+                if (data.success)
+                    window.location.reload()
+                else
+                    console.error(data.message)
+            })
+            .catch(console.error)
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -48,7 +50,9 @@ const Users = () => {
             <Modal id={userId} deleteUser={deleteUser} userName={userName} />
             <h2 className="users-title">Usuarios</h2>
             <Link to="/user/create" className="create-user">Agregar Usuario</Link>
-            <button className="import-users" onClick={importAPIUsers}>Import Users</button>
+            <button type="button" className="import-users" onClick={importAPIUsers}>
+                Importar Usuarios
+            </button>
             <table className="responsive-table">
                 <thead>
                     <tr className="table-header">
@@ -68,13 +72,17 @@ const Users = () => {
                                     <Gravatar email={user.email} size={30} />
                                 </td>
                                 <td className="edit-user" onClick={() => editUser(user._id)}>
-                                    {user.name}</td>
+                                    {user.name}
+                                </td>
                                 <td className="edit-user" onClick={() => editUser(user._id)}>
-                                    {user.email}</td>
+                                    {user.email}
+                                </td>
                                 <td className="edit-user" onClick={() => editUser(user._id)}>
-                                    {user.address.city}</td>
+                                    {user.address.city}
+                                </td>
                                 <td className="edit-user" onClick={() => editUser(user._id)}>
-                                    {user.company.name}</td>
+                                    {user.company.name}
+                                </td>
                                 <td>
                                     <AiOutlineDelete 
                                         className="delete-icon"

@@ -9,8 +9,11 @@ const {
   newUser,
   updateUser,
   removeUser,
-  importUsers
+  importAPIUsers
 } = require('./src/userResolver')
+
+const indexRouter = require('./src/routes/index');
+const usersRouter = require('./src/routes/users');
 
 
 const app = express()
@@ -20,23 +23,8 @@ app.use(express.json())
 
 app.use(cors({ origin: '*' }));
 
-app.get('/users', async (req, res) => 
-  res.send(await allUsers()))
-
-app.get('/user/:id', async (req, res) => 
-  res.send(await userById(req.params.id)))
-
-app.post('/user/create', async (req, res) => 
-  res.json(await newUser(req.body)))
-
-app.post('/user/edit', async (req, res) => 
-  res.json(await updateUser(req.body)))
-
-app.delete('/user/delete/:id', async (req, res) => 
-  res.json(await removeUser(req.params.id)))
-
-app.post('/users/import', async (req, res) =>
-  res.json(await importUsers(req.body)))
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
 

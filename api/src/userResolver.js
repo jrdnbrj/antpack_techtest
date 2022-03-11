@@ -4,6 +4,7 @@ const {
     createUser,
     editUser,
     deleteUser,
+    importUsers
 } = require('./userService')
 
 
@@ -22,12 +23,12 @@ const newUser = async data => {
 
     if (user && user._id)
         return {
-            created: true,
+            success: true,
             message: 'Usuario creado correctamente.',
         }
     else 
         return {
-            created: false,
+            success: false,
             message: 'Error al crear el usuario.',
         }
 }
@@ -37,12 +38,12 @@ const updateUser = async data => {
     
     if (user && user._id)
         return {
-            updated: true,
+            success: true,
             message: 'Usuario actualizado correctamente.',
         }
     else 
         return {
-            updated: false,
+            success: false,
             message: 'Error al actualizar el usuario.',
         }
 }
@@ -52,17 +53,29 @@ const removeUser = async id => {
 
     if (user && user._id)
         return {
-            deleted: true,
+            success: true,
             message: 'Usuario eliminado correctamente.',
         }
     else 
         return {
-            deleted: false,
+            success: false,
             message: 'Error al eliminar el usuario.',
         }
 }
-// data = [{}, {}]
-const importUsers = async data => {
+
+const importAPIUsers = async data => {
+    const users = await importUsers(data)
+
+    if (users && users.length)
+        return {
+            success: true,
+            message: 'Usuarios importados correctamente.',
+        }
+    else 
+        return {
+            success: false,
+            message: 'Error al importar los usuarios.',
+        }
 }
     
 
@@ -73,5 +86,5 @@ module.exports = {
     newUser,
     updateUser,
     removeUser,
-    importUsers
+    importAPIUsers
 }

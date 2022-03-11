@@ -27,8 +27,8 @@ const deleteUser = async id => {
 }
 
 const importUsers = async data => {
-    const users = await User.insertMany(data)
-    return users
+    const response = await User.insertMany(data)
+    return response
 }
 
 module.exports = {

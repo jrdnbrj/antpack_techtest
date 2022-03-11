@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { getUsers, deleteUser } from '../api'
+import { getUsers, deleteUser, importUsers } from '../api'
 import Loading from '../components/Loading'
 import Modal from '../components/Modal'
 import Gravatar from 'react-gravatar'
@@ -32,11 +32,23 @@ const Users = () => {
         modal.style.display = 'flex'
     }
 
+    const importAPIUsers = () => {
+        // setLoading(true)
+        console.log('Users imported')
+        // importUsers()
+        //     .then(() => {
+        //         console.log('Users imported')
+        //     })
+        //     .catch(console.error)
+        //     .finally(() => setLoading(false))
+    }
+
     return (
         <div className="container">
             <Modal id={userId} deleteUser={deleteUser} userName={userName} />
             <h2 className="users-title">Usuarios</h2>
             <Link to="/user/create" className="create-user">Agregar Usuario</Link>
+            <button className="import-users" onClick={importAPIUsers}>Import Users</button>
             <table className="responsive-table">
                 <thead>
                     <tr className="table-header">
@@ -52,13 +64,17 @@ const Users = () => {
                     {users.map((user, i) => {
                         return (
                             <tr className="table-row" key={i}>
-                                <td onClick={() => editUser(user._id)}>
+                                <td className="edit-user" onClick={() => editUser(user._id)}>
                                     <Gravatar email={user.email} size={30} />
                                 </td>
-                                <td onClick={() => editUser(user._id)}>{user.name}</td>
-                                <td onClick={() => editUser(user._id)}>{user.email}</td>
-                                <td onClick={() => editUser(user._id)}>{user.address.city}</td>
-                                <td onClick={() => editUser(user._id)}>{user.company.name}</td>
+                                <td className="edit-user" onClick={() => editUser(user._id)}>
+                                    {user.name}</td>
+                                <td className="edit-user" onClick={() => editUser(user._id)}>
+                                    {user.email}</td>
+                                <td className="edit-user" onClick={() => editUser(user._id)}>
+                                    {user.address.city}</td>
+                                <td className="edit-user" onClick={() => editUser(user._id)}>
+                                    {user.company.name}</td>
                                 <td>
                                     <AiOutlineDelete 
                                         className="delete-icon"
@@ -69,6 +85,10 @@ const Users = () => {
                             </tr>
                         )
                     })}
+                    {users.length < 1 && 
+                        <tr className="table-row">
+                            <td colSpan="6">No hay usuarios</td>
+                        </tr>}
                 </tbody>
             </table>
         </div>

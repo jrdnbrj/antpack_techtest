@@ -7,7 +7,6 @@ const Modal = ({ id, userName, deleteUser }) => {
     const [loading, setLoading] = useState(false)
 
     const closeModal = () => {
-        console.log('Close')
         const modal = document.getElementById('modal')
         modal.style.display = 'none'
     }
@@ -15,17 +14,12 @@ const Modal = ({ id, userName, deleteUser }) => {
     const handleDelete = () => {
         setLoading(true)
         deleteUser(id)
-            .then(() => {
-                console.log('User deleted')
-                closeModal()
-            })
+            .then(() => setLoading(false))
             .catch(console.error)
-            .finally(() => setLoading(false))
+            .finally(() => window.location.reload())
     }
 
     return (
-        <>
-        
         <div id="modal">
             <div className="modal-header">
                 <h1>Eliminar Usuario</h1>
@@ -48,7 +42,6 @@ const Modal = ({ id, userName, deleteUser }) => {
                 </div>
             </div>
         </div>
-        </>
     )
 }
 

@@ -1,7 +1,7 @@
 This application is a CRUD of the users table with the structure of the following api [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users).
 
 
-Before running the application clone the repository with `https://github.com/jrdnbrj/antpack_techtest`.
+Before running the application clone the repository with `git clone https://github.com/jrdnbrj/antpack_techtest`.
 
 
 To run this application it is necessary to run the server-side and the client-side.

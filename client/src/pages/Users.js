@@ -16,6 +16,7 @@ const Users = () => {
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
 
+    // Runs only once when starting the component
     useEffect(() => {
         setLoading(true)
         getUsers()
@@ -25,6 +26,9 @@ const Users = () => {
 
     const editUser = id => navigate(`/user/edit/${id}`)
 
+    // Sets the userId and userName as a local state and sends to Modal Component
+    // to be able to delete later. The use of React Redux was algo possible but
+    // due to the simplicity of the application it was not necessary
     const removeUser = user => {
         setUserId(user._id)
         setUserName(user.name)
@@ -32,6 +36,7 @@ const Users = () => {
         modal.style.display = 'flex'
     }
 
+    // If the import of users is successful, the page is reloaded to see the changes
     const importAPIUsers = () => {
         console.log('Users imported')
         importUsers()

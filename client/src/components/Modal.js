@@ -24,14 +24,9 @@ const Modal = ({ id, userName, deleteUser }) => {
             <div className="modal-header">
                 <h1>Eliminar Usuario</h1>
             </div>
-            {/* <div className="modal-close">
-                <span onClick={closeModal}>
-                    x
-                </span>
-            </div> */}
             <div className="modal-body">
                 <p>
-                    Estás seguro que deseas eliminar la información de contacto de <strong>{userName}</strong>?
+                    ¿Estás seguro que deseas eliminar la información de usuario de <strong>{userName}</strong>?
                 </p>
                 <div>
                     <button className="delete-btn" onClick={handleDelete}>

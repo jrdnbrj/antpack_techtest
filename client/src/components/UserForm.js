@@ -3,12 +3,17 @@ import EmailValidator from 'email-validator'
 import urlRegex from 'url-regex'
 import Loading from './Loading'
 
+
 const UserForm = ({ onSubmit, user = {} }) => {
 
+    // loading variable to show the loading spinner
     const [loading, setLoading] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
     const [successMsg, setSuccessMsg] = useState('')
 
+    // Validate that the form doesn't have any empty fields
+    // Validate that the email is valid
+    // Validate that the url is valid
     const validateForm = user => {
         const { 
             name, username, email, address, 
@@ -72,6 +77,8 @@ const UserForm = ({ onSubmit, user = {} }) => {
 
         const form = e.target
 
+        // Builds the user object from the form to validate
+        // to send it to our Backend
         const userForm = {
             name: form.name.value,
             username: form.username.value,
@@ -111,6 +118,7 @@ const UserForm = ({ onSubmit, user = {} }) => {
         setLoading(false)
     }
 
+    // Display error or success messages
     const MessageStatus = () => {
         if (errorMsg) {
             return (

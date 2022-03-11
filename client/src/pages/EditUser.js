@@ -7,6 +7,7 @@ import { editUser, getUserById } from '../api'
 
 const EditUser = () => {
 
+    // Gets the user id param from the url
     const { id } = useParams()
 
     const [user, setUser] = useState({})
